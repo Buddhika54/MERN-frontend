@@ -49,7 +49,7 @@ const Home = () => {
     <div className="font-sans text-white-800">
       {/* NAVBAR */}
       <nav
-        className={`fixed top-0 left-0 w-full px-6 bg-black/40 py-4 flex flex-wrap items-center justify-between shadow-md z-50 transition-all duration-500 ${
+        className={`fixed top-0 left-0 w-full px-6 bg-black/80 py-4 flex flex-wrap items-center justify-between shadow-md z-50 transition-all duration-500 ${
           navScrolled ? "bg-black text-white" : "bg-transparent text-white"
         }`}
       >
@@ -61,18 +61,27 @@ const Home = () => {
           />
           <span className="text-2xl font-bold text-green">RANAYA</span></div>
         <ul className="hidden md:flex space-x-6 text-lg">
-          <li><a href="/home" className="hover:text-green-300 font-family: 'Poppins', sans-serif">Home</a></li>
-          <li><a href="/ourStory" className="hover:text-green-300 font-family: 'Poppins', sans-serif">Our Story</a></li>
-          <li><a href="/ourOfferings" className="hover:text-green-300 font-family: 'Poppins', sans-serif">Our Offerings</a></li>
-          <li><a href="/NewsPage" className="hover:text-green-300 font-family: 'Poppins', sans-serif">News</a></li>
-          <li><a href="/ContactUspage" className="hover:text-green-300 font-family: 'Poppins', sans-serif">Contact Us</a></li>
+          <li><a href="/home" className="hover:text-green-300 font-family: 'Playfair Display', sans-serif
+          underline underline-offset-4 decoration-green-500 ">Home</a></li>
+          <li><a href="/ourStory" className="hover:text-green-300 font-family: 'Montserrat', sans-serif">Our Story</a></li>
+          <li><a href="/ourOfferings" className="hover:text-green-300 font-family: 'Montserrat', sans-serif">Our Products</a></li>
+          <li><a href="/NewsPage" className="hover:text-green-300 font-family: 'Montserrat', sans-serif">News</a></li>
+          <li><a href="/ContactUspage" className="hover:text-green-300 font-family: 'Montserrat', sans-serif">Contact Us</a></li>
         </ul>
-        <div className="mt-2 md:mt-0">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="px-3 py-1 rounded-md text-white"
-          />
+        <div className="flex items-center space-x-3 mt-2 md:mt-0">
+          <div className="border rounded-lg">
+            <input
+              type="text"
+              placeholder="Search..."
+              className="px-3 py-1 rounded-md text-green-500"
+            />
+          </div>
+          <a
+            href="/join"
+            className="px-4 py-2 bg-green-700 text-white font-semibold rounded-lg shadow-md hover:bg-green-500 transition duration-300"
+          >
+            Join Us
+          </a>
         </div>
         {/* Mobile Menu Button */}
         <button
@@ -104,7 +113,7 @@ const Home = () => {
         <ul className="flex flex-col space-y-4 mt-6 px-4 text-lg">
           <li><a href="/home" className="hover:text-orange-300" onClick={() => setSidebarOpen(false)}>Home</a></li>
           <li><a href="/ourStory" className="hover:text-orange-300" onClick={() => setSidebarOpen(false)}>Our Story</a></li>
-          <li><a href="/ourOfferings" className="hover:text-orange-300" onClick={() => setSidebarOpen(false)}>Our Offerings</a></li>
+          <li><a href="/ourOfferings" className="hover:text-orange-300" onClick={() => setSidebarOpen(false)}>Our Products</a></li>
           <li><a href="/NewsPage" className="hover:text-orange-300" onClick={() => setSidebarOpen(false)}>News</a></li>
           <li><a href="/ContactUspage" className="hover:text-orange-300" onClick={() => setSidebarOpen(false)}>Contact Us</a></li>
         </ul>
@@ -205,37 +214,43 @@ const Home = () => {
       </section>
 
       {/* OUR OFFERINGS */}
-      <section id="offerings" className="py-16 px-6 bg-gray-300">
+      <section id="offerings" className="py-16 px-6 bg-white">
         <h2 className="text-3xl font-bold text-center mb-12">Our Offerings</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-            <img
-              src="https://www.theteapalace.co.uk/cdn/shop/files/Green_TopDown_2.jpg?v=1708964869&width=1500"
-              alt="Green Tea"
-              className="w-full h-48 object-cover"
-            />
+            <a href="/green-tea">
+              <img
+                src="https://www.theteapalace.co.uk/cdn/shop/files/Green_TopDown_2.jpg?v=1708964869&width=1500"
+                alt="Green Tea"
+                className="w-full h-80 object-fix cursor-pointer hover:scale-105 transition-transform duration-300"
+              />
+            </a>
             <div className="p-6">
               <h3 className="text-xl font-semibold mb-2">Green Tea</h3>
               <p>Fresh, healthy, and full of antioxidants for a refreshing taste.</p>
             </div>
           </div>
           <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-            <img
-              src="https://rareteacompany.com/cdn/shop/products/Rare-Tea-Company-Rare-Sri-Lankan-Black-1200px-4.jpg?v=1748622897"
-              alt="Black Tea"
-              className="w-full h-48 object-cover"
-            />
+            <a href="/green-tea">
+              <img
+                src="https://rareteacompany.com/cdn/shop/products/Rare-Tea-Company-Rare-Sri-Lankan-Black-1200px-4.jpg?v=1748622897"
+                alt="Black Tea"
+                className="w-full h-80 object-fix cursor-pointer hover:scale-105 transition-transform duration-300"
+              />
+            </a> 
             <div className="p-6">
               <h3 className="text-xl font-semibold mb-2">Black Tea</h3>
               <p>Strong and bold flavor, perfect for energizing your mornings.</p>
             </div>
           </div>
           <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-            <img
-              src="https://teacultureoftheworld.com/cdn/shop/articles/Blog-june-5-665x300_972465a5-63c7-4e46-9c93-c5321ccdf2a3.jpg?v=1670000322&width=600"
-              alt="Herbal Tea"
-              className="w-full h-48 object-cover"
-            />
+            <a href="/green-tea">
+              <img
+                src="https://teacultureoftheworld.com/cdn/shop/articles/Blog-june-5-665x300_972465a5-63c7-4e46-9c93-c5321ccdf2a3.jpg?v=1670000322&width=600"
+                alt="Herbal Tea"
+                className="w-full h-80 object-fix cursor-pointer hover:scale-105 transition-transform duration-300"
+              />
+            </a>
             <div className="p-6">
               <h3 className="text-xl font-semibold mb-2">Herbal Tea</h3>
               <p>Natural blends of herbs and flowers for relaxation & wellness.</p>
@@ -244,11 +259,13 @@ const Home = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
           <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-            <img
-              src="https://d1nfzpfm1g6xft.cloudfront.net/2019/12/default-header-mobile.jpg"
-              alt="Green Tea"
-              className="w-full h-48 object-cover"
-            />
+            <a href="/green-tea">
+              <img
+                src="https://d1nfzpfm1g6xft.cloudfront.net/2019/12/default-header-mobile.jpg"
+                alt="Green Tea"
+                className="w-full h-80 object-fix cursor-pointer hover:scale-105 transition-transform duration-300"
+              />
+            </a>
             <div className="p-6">
               <h3 className="text-xl font-semibold mb-2">Tourist Experiences</h3>
               <p>Factory Tour: LKR 3,000 per person. Includes a step-by-step guided tour of how tea is produced, tea tastings, visits to a café and factory-fresh tea shop, 
@@ -256,22 +273,26 @@ const Home = () => {
             </div>
           </div>
           <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-            <img
-              src="https://pbs.twimg.com/media/Gvp0hJJXMAAFOO_?format=jpg&name=4096x4096"
-              alt="Black Tea"
-              className="w-full h-48 object-cover"
-            />
+            <a href="/green-tea">
+              <img
+                src="https://pbs.twimg.com/media/Gvp0hJJXMAAFOO_?format=jpg&name=4096x4096"
+                alt="Black Tea"
+                className="w-full h-80 object-fix cursor-pointer hover:scale-105 transition-transform duration-300"
+              />
+            </a>
             <div className="p-6">
               <h3 className="text-xl font-semibold mb-2">Tea Tasting Sessions</h3>
               <p>Discover the unique flavors of our teas.Expert-led tasting of different grades and varieties.Learn brewing techniques and how to identify aroma, strength, and character.</p>
             </div>
           </div>
           <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-            <img
-              src="https://www.alveus.eu/wp-content/smush-webp/040-a.jpg.webp"
-              alt="Herbal Tea"
-              className="w-full h-48 object-cover"
-            />
+            <a href="/green-tea">
+              <img
+                src="https://www.alveus.eu/wp-content/smush-webp/040-a.jpg.webp"
+                alt="Herbal Tea"
+                className="w-full h-80 object-fix cursor-pointer hover:scale-105 transition-transform duration-300"
+              />
+            </a>
             <div className="p-6">
               <h3 className="text-xl font-semibold mb-2">Cultural & Heritage Insights</h3>
               <p>Learn about the history of Ceylon tea.Discover colonial influences and our local traditions.Explore tea museum-style displays and archival stories..</p>
@@ -292,34 +313,40 @@ const Home = () => {
         <h2 className="text-3xl text-white font-bold text-center mb-12">News & Events</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-            <img
-              src="https://bmkltsly13vb.compat.objectstorage.ap-mumbai-1.oraclecloud.com/cdn.ft.lk/assets/uploads/image_0510ecaf51.jpg"
-              alt="Event"
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-6">
-              <h3 className="text-xl font-semibold mb-2">Annual Report 2024/2025</h3>
-            </div>
+            <a href="/NewsPage">
+              <img
+                src="https://bmkltsly13vb.compat.objectstorage.ap-mumbai-1.oraclecloud.com/cdn.ft.lk/assets/uploads/image_0510ecaf51.jpg"
+                alt="Event"
+                className="w-full h-48 object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
+              />
+              <div className="p-6">
+                <h3 className="text-xl font-semibold mb-2">Annual Report 2024/2025</h3>
+              </div>
+            </a>
           </div>
           <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-            <img
-              src="https://stclairteas.com/wp-content/uploads/2020/03/100.jpg"
-              alt="Workshop"
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-6">
-              <h3 className="text-xl font-semibold mb-2">Tea Tasting Workshop</h3>
-            </div>
+            <a href="/NewsPage">
+              <img
+                src="https://stclairteas.com/wp-content/uploads/2020/03/100.jpg"
+                alt="Workshop"
+                className="w-full h-48 object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
+              />
+              <div className="p-6">
+                <h3 className="text-xl font-semibold mb-2">Tea Tasting Workshop</h3>
+              </div>
+            </a>
           </div>
           <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-            <img
-              src="https://malaysia.themispartner.com/wp-content/uploads/notice-of-meeting-malaysia.jpg"
-              alt="Community"
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-6">
-              <h3 className="text-xl font-semibold mb-2">Notice Of Meeting</h3>
-            </div>
+            <a href="/NewsPage">
+              <img
+                src="https://malaysia.themispartner.com/wp-content/uploads/notice-of-meeting-malaysia.jpg"
+                alt="Community"
+                className="w-full h-48 object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
+              />  
+              <div className="p-6">
+                <h3 className="text-xl font-semibold mb-2">Notice Of Meeting</h3>
+              </div>
+            </a>
           </div>
         </div>
       </section>

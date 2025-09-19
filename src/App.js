@@ -16,12 +16,23 @@ import AddDepartments from './components/department/AddDepartments';
 import EditDepartment from './components/department/EditDepartment';
 import EmpList from './components/employee/EmpList';
 import EmpAdd from './components/employee/EmpAdd';
+import Blacktea from './fontend/Blacktea';
+import GreenTea from './fontend/Greentea';
+import FlavoredBlends from './fontend/Fleverdblends';
+import Organictea from './fontend/Organictea';
+import Herbal from './fontend/Herbal';
+import LoosePack from './fontend/LoosePack';
+import JoinUs from './fontend/JoinUs';
+import View from './components/employee/View';
+import Edit from './components/employee/Edit';
+import SalaryAdd from './components/Salary/SalaryAdd';
+import SalaryView from './components/Salary/SalaryView';
 
 function App(){
   return(
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Navigate to="/admin-dashboard" />}/>
+          <Route path="/" element={<Navigate to="/home" />}/>
           <Route path="/login" element={<AdminLogin />} />
           <Route path="/admin-dashboard" element={
             <PrivateRoutes>
@@ -38,8 +49,11 @@ function App(){
 
             <Route path="/admin-dashboard/employees" element={<EmpList />}></Route>
             <Route path="/admin-dashboard/add-employee" element={<EmpAdd />}></Route> 
+            <Route path="/admin-dashboard/employees/:id" element={<View />}></Route>
+            <Route path="/admin-dashboard/employees/edit/:id" element={<Edit />}></Route>
 
-
+            <Route path="/admin-dashboard/salary" element={<SalaryAdd />}></Route>
+            <Route path="/admin-dashboard/employees/salary/:id" element={<SalaryView />}></Route>
 
           </Route>
           <Route path="/emp-dashboard" element={<EmpDashboard />}/>
@@ -48,6 +62,13 @@ function App(){
           <Route path="/ourOfferings" element={<OurOfferingpage/>}></Route>
           <Route path="/NewsPage" element={<NewsPage/>}></Route>
           <Route path="/ContactUspage" element={<ContactUspage/>}></Route>
+          <Route path="/blacktea" element={<Blacktea/>}></Route>
+          <Route path="/greentea" element={<GreenTea/>}></Route>
+          <Route path="/flevored" element={<FlavoredBlends/>}></Route>
+          <Route path="/organictea" element={<Organictea/>}></Route>
+          <Route path="/herbal" element={<Herbal/>}></Route>
+          <Route path="/loose" element={<LoosePack/>}></Route>
+          <Route path="/join" element={<JoinUs/>}></Route>
         </Routes>
       </BrowserRouter>
   );

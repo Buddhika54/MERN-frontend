@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
-import '../output.css'
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import assets from "../assets/RANAYA Logo.png";
+import "../output.css";
 
-// ✅ Hero images (you can replace with your tea factory images)
+// ✅ Hero images
 const heroImages = [
-  "https://www.sunplast.lk/images/2023/01/25/heritance-tea-factory.jpg",
-  "https://media.istockphoto.com/id/1264096949/photo/lush-tea-leaves-in-the-human-hands.jpg?s=612x612&w=0&k=20&c=zCZ-Gh7hM3rJ0vdhmPVB1xgMEP3HFPUGtX_EP2dwjE8=",
-  "https://media.istockphoto.com/id/177040934/photo/green-tea-plantation.jpg?s=612x612&w=0&k=20&c=csHVCZb1cDh7XoKuZvu_cbIZRHBzCRFUYB4NJxtSARU=",
+  "https://us-east-1-shared-usea1-02.graphassets.com/A2lCPH6tTelhrsostvMQpz/auto_image/resize=fit:max,width:3840/quality=value:75/ZUMivtfRkCZgiJrnFuJN",
 ];
 
 function ContactUs() {
   const [currentHero, setCurrentHero] = useState(0);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [navScrolled, setNavScrolled] = useState(false);
 
   // Auto slide hero background
   useEffect(() => {
@@ -21,26 +22,67 @@ function ContactUs() {
     return () => clearInterval(interval);
   }, []);
 
+  // Navbar scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setNavScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // ✅ Map configuration
+  const mapContainerStyle = {
+    width: "100%",
+    height: "400px",
+    borderRadius: "10px",
+  };
+
+  // Example coordinates for Ragama, Sri Lanka (replace with exact factory location)
+  const center = {
+    lat: 7.0271,
+    lng: 79.9229,
+  };
+
   return (
     <div className="font-sans text-gray-800">
       {/* NAVBAR */}
-      <nav className="fixed top-0 left-0 w-full bg-green-700 text-white px-6 py-4 flex flex-wrap items-center justify-between shadow-lg z-50">
-        <div className="text-2xl font-bold">Tea Factory</div>
-        <ul className="hidden md:flex space-x-6 text-lg">
-          <li><a href="/home" className="hover:text-orange-300">Home</a></li>
-          <li><a href="/ourStory" className="hover:text-orange-300">Our Story</a></li>
-          <li><a href="/ourOfferings" className="hover:text-orange-300">Our Offerings</a></li>
-          <li><a href="/NewsPage" className="hover:text-orange-300">News</a></li>
-          <li><a href="/ContactUspage" className="hover:text-orange-300">Contact Us</a></li>
-        </ul>
-        <div className="mt-2 md:mt-0">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="px-3 py-1 rounded-md text-gray-800"
+      <nav
+        className={`fixed top-0 left-0 w-full px-6 py-4 flex bg-black/80 flex-wrap items-center justify-between shadow-md z-50 transition-all duration-500 ${
+          navScrolled ? "bg-black text-white" : "bg-transparent text-white"
+        }`}
+      >
+        <div className="flex flex-col items-center ms-5">
+          <img
+            src={assets}
+            alt="Ranaya Logo"
+            className="w-8 h-8 object-contain mb-2"
           />
+          <span className="text-2xl font-bold text-green">RANAYA</span>
         </div>
-            {/* Mobile Menu Button */}
+        <ul className="hidden md:flex space-x-6 text-lg">
+          <li><a href="/home" className="hover:text-green-300">Home</a></li>
+          <li><a href="/ourStory" className="hover:text-green-300">Our Story</a></li>
+          <li><a href="/ourOfferings" className="hover:text-green-300">Our Products</a></li>
+          <li><a href="/NewsPage" className="hover:text-green-300">News</a></li>
+          <li><a href="/ContactUspage" className="hover:text-green-300 underline underline-offset-4 decoration-green-500">Contact Us</a></li>
+        </ul>
+        <div className="flex items-center space-x-3 mt-2 md:mt-0">
+          <div className="border rounded-lg">
+            <input
+              type="text"
+              placeholder="Search..."
+              className="px-3 py-1 rounded-md text-green-500"
+            />
+          </div>
+          <a
+            href="/login"
+            className="px-4 py-2 bg-green-700 text-white font-semibold rounded-lg shadow-md hover:bg-green-500 transition duration-300"
+          >
+            Join Us
+          </a>
+        </div>
+        {/* Mobile Menu Button */}
         <button
           className="md:hidden text-2xl"
           onClick={() => setSidebarOpen(true)}
@@ -64,7 +106,7 @@ function ContactUs() {
         <ul className="flex flex-col space-y-4 mt-6 px-4 text-lg">
           <li><a href="/" className="hover:text-orange-300" onClick={() => setSidebarOpen(false)}>Home</a></li>
           <li><a href="/ourStory" className="hover:text-orange-300" onClick={() => setSidebarOpen(false)}>Our Story</a></li>
-          <li><a href="/ourOfferings" className="hover:text-orange-300" onClick={() => setSidebarOpen(false)}>Our Offerings</a></li>
+          <li><a href="/ourOfferings" className="hover:text-orange-300" onClick={() => setSidebarOpen(false)}>Our Products</a></li>
           <li><a href="/NewsPage" className="hover:text-orange-300" onClick={() => setSidebarOpen(false)}>News</a></li>
           <li><a href="/ContactUspage" className="hover:text-orange-300" onClick={() => setSidebarOpen(false)}>Contact Us</a></li>
         </ul>
@@ -78,10 +120,9 @@ function ContactUs() {
         ></div>
       )}
 
-
-      {/*HERO SECTION */}
+      {/* HERO SECTION */}
       <section
-        className="relative h-[80vh] flex items-center justify-center text-center text-white"
+        className="relative h-[100vh] flex items-center justify-center text-center text-white"
         style={{
           backgroundImage: `url(${heroImages[currentHero]})`,
           backgroundSize: "cover",
@@ -89,7 +130,7 @@ function ContactUs() {
           transition: "background-image 1s ease-in-out",
         }}
       >
-        <div className="absolute inset-0 "></div>
+        <div className="absolute inset-0 bg-black/40"></div>
         <div className="relative z-10 px-6">
           <h1 className="text-4xl md:text-6xl font-bold mb-4">Contact Us</h1>
           <p className="max-w-2xl mx-auto text-lg">
@@ -99,9 +140,8 @@ function ContactUs() {
         </div>
       </section>
 
-      {/* ✅ CONTACT FORM & DETAILS */}
+      {/* CONTACT FORM & DETAILS */}
       <section className="py-16 container mx-auto px-6 grid md:grid-cols-2 gap-10">
-        
         {/* Contact Form */}
         <div className="bg-white p-8 shadow-lg rounded-lg">
           <h2 className="text-2xl font-bold text-green-700 mb-6">Send Us a Message</h2>
@@ -143,12 +183,26 @@ function ContactUs() {
           <div>
             <p className="font-medium">🌐 Follow Us:</p>
             <div className="flex space-x-4 mt-2">
-              <a href="/ContactUspage" className="text-green-700 hover:text-green-900">Facebook</a>
-              <a href="/ContactUspage" className="text-green-700 hover:text-green-900">Instagram</a>
-              <a href="/ContactUspage" className="text-green-700 hover:text-green-900">LinkedIn</a>
+              <a href="/" className="text-green-700 hover:text-green-900">Facebook</a>
+              <a href="/" className="text-green-700 hover:text-green-900">Instagram</a>
+              <a href="/" className="text-green-700 hover:text-green-900">LinkedIn</a>
             </div>
           </div>
         </div>
+      </section>
+
+      {/* ✅ INTERACTIVE GOOGLE MAP */}
+      <section className="px-6 pb-12">
+        <h3 className="text-2xl font-bold text-center mb-4">Find Us Here</h3>
+        <LoadScript googleMapsApiKey="AIzaSyAkBKS1F5HQ2P1yCTrA51jtANiGUIpZps4">
+          <GoogleMap
+            mapContainerStyle={mapContainerStyle}
+            center={center}
+            zoom={15}
+          >
+            <Marker position={center} />
+          </GoogleMap>
+        </LoadScript>
       </section>
 
       {/* FOOTER */}
@@ -166,11 +220,7 @@ function ContactUs() {
           </div>
           {/* MIDDLE */}
           <div className="flex flex-col items-center justify-center">
-            <img 
-              src="https://bogawantalawa.com/wp-content/uploads/2020/07/cropped-bogawantalawa-favicon.png"
-              alt="Factory Logo"
-              className="w-12 h-12 mb-2"
-            />
+            <img src={assets} alt="Factory Logo" className="w-12 h-12 mb-2" />
             <h4 className="text-xl font-bold">RANAYA</h4>
             <p className="text-sm tracking-widest">CLIMATE POSITIVE AND BEYOND</p>
           </div>

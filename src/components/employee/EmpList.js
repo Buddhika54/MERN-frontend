@@ -8,6 +8,7 @@ const EmpList = () => {
 
   const [employees, setEmployees] = useState([])
   const [empLoading, setEmpLoarding] = useState(false)
+  const [filterEmployee, setFilterEmployee] = useState([])
 
   useEffect(() => {
     const fetchEmployee = async () => {
@@ -26,13 +27,14 @@ const EmpList = () => {
                 sno: sno++,
                 dep_name: emp.department.dep_name,
                 name: emp.userId.name,
-                dob: new Date(emp.dob).toDateString(),
-                profileImage: emp.profileImage,
+                dob: new Date(emp.dob).toLocaleDateString(),
+                profileImage: <img width={40} height={40} className= 'rounded-full' src={`http://localhost:3001/${emp.userId.profileImage}`} alt='Employee'/>,
                 action: (<EmployeeButtons _id={emp._id}/>),
 
               }
             ));
             setEmployees(data);
+            setFilterEmployee(data);
         }
       }catch(error){
         if(error.response && !error.response.data.success){
@@ -46,25 +48,34 @@ const EmpList = () => {
     fetchEmployee();
   }, []);
 
+  const handleFilter = (e) => {
+    const record = employees.filter((emp) => (
+      emp.name.toLowerCase().includes(e.target.value.toLowerCase())
+    ))
+    setFilterEmployee(record)
+  }
+
   return (
+    <>{empLoading ? <div>Loading...</div> : 
     <div className='p-6'>
        <div className='text-center'>
         <h3 className='text-2xl font-bold'>Manage Employees</h3>
       </div>
       <div className='flex justify-between items-center'>
-        <input type="text" placeholder='Search By Dep Name' className='px-4 py-0.5 border' />
+        <input type="text" placeholder='Search By Emp Name' className='px-4 py-0.5 border' onChange={handleFilter} />
         <Link 
           to="/admin-dashboard/add-employee" 
           className='px-4 py-1 bg-teal-600 rounded text-white'>
             Add New Employee
         </Link>
       </div>
-      <div>
+      <div className='mt-6'>
         <DataTable 
-          columns={columns} data={employees}
+          columns={columns} data={filterEmployee} pagination
         />
       </div>
     </div>
+    }</>
   )
 }
 

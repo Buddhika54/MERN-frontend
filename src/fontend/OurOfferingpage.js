@@ -37,37 +37,37 @@ const OurOfferings = () => {
       url: "https://rareteacompany.com/cdn/shop/products/Rare-Tea-Company-Rare-Sri-Lankan-Black-1200px-4.jpg?v=1748622897",
       title: "Premium Black Tea",
       description: "Rich in flavor and aroma, carefully handpicked from our finest estates.",
-      link: "#black-tea",
+      link: "/blacktea",
     },
     {
       url: "https://www.theteapalace.co.uk/cdn/shop/files/Green_TopDown_2.jpg?v=1708964869&width=1500",
       title: "Green Tea",
       description: "Naturally refreshing and packed with antioxidants for a healthy lifestyle.",
-      link: "#green-tea",
+      link: "/greentea",
     },
     {
       url: "https://collectingexp.com/wp-content/uploads/IMG_1971.jpg",
       title: "Flavored Blends",
       description: "Unique blends infused with natural fruits, herbs, and spices.",
-      link: "#flavored-blends",
+      link: "/flevored",
     },
     {
       url: "https://cdn.shopify.com/s/files/1/1576/7147/files/Sorting_Tea_leaves_large.jpg?v=1598350015",
       title: "Organic Tea",
       description: "Certified organic teas grown with sustainable farming practices.",
-      link: "#organic-tea",
+      link: "/organictea",
     },
     {
-      url: "https://wholeisticliving.com/wp-content/uploads/2022/10/Different-types-of-herbal-tea-infusions.jpg",
+      url: "https://masterteafactory.com/cdn/shop/products/DSC_0014.JPG?v=1551030619&width=2400",
       title: "Herbal Infusions",
       description: "A calming collection of herbal teas crafted to soothe and energize.",
-      link: "#herbal-infusions",
+      link: "/herbal",
     },
     {
-      url: "https://www.teardrop-hotels.com/camellia-hills/wp-content/uploads/sites/9/2024/07/Guided-Tea-Factory-Tour-2-500x620-2.jpg",
-      title: "Export & Packaging",
-      description: "Customized packaging and export solutions to deliver worldwide.",
-      link: "#export-packaging",
+      url: "https://vietnam-tea.com/wp-content/uploads/2022/02/Kraft-paper-bag.jpg",
+      title: "Loose Leaf Packs",
+      description: "Premium hand-picked Ceylon teas, packed to preserve freshness and aroma. Perfect for an authentic brewing experience..",
+      link: "/loose",
     },
   ];
 
@@ -84,7 +84,7 @@ const OurOfferings = () => {
   return (
     <div className="font-sans text-gray-800">
       {/* NAVBAR */}
-      <nav className={`fixed top-0 left-0 w-full bg-black/40 px-6 py-4 flex flex-wrap items-center justify-between shadow-md z-50 transition-all duration-500 ${
+      <nav className={`fixed top-0 left-0 w-full bg-black/80 px-6 py-4 flex flex-wrap items-center justify-between shadow-md z-50 transition-all duration-500 ${
           navScrolled ? "bg-black text-white" : "bg-transparent text-white"
         }`} >
         <div className="flex flex-col items-center ms-5">
@@ -95,18 +95,26 @@ const OurOfferings = () => {
           />
           <span className="text-2xl font-bold text-green">RANAYA</span></div>
         <ul className="hidden md:flex space-x-6 text-lg">
-          <li><a href="/home" className="hover:text-orange-300">Home</a></li>
-          <li><a href="/ourStory" className="hover:text-orange-300">Our Story</a></li>
-          <li><a href="/ourOfferings" className="hover:text-orange-300">Our Offerings</a></li>
-          <li><a href="/NewsPage" className="hover:text-orange-300">News</a></li>
-          <li><a href="/ContactUspage" className="hover:text-orange-300">Contact Us</a></li>
+          <li><a href="/home" className="hover:text-green-300 ">Home</a></li>
+          <li><a href="/ourStory" className="hover:text-green-300">Our Story</a></li>
+          <li><a href="/ourOfferings" className="hover:text-green-300 underline underline-offset-4 decoration-green-500">Our Products</a></li>
+          <li><a href="/NewsPage" className="hover:text-green-300">News</a></li>
+          <li><a href="/ContactUspage" className="hover:text-green-300">Contact Us</a></li>
         </ul>
-        <div className="mt-2 md:mt-0">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="px-3 py-1 rounded-md text-gray-800"
-          />
+        <div className="flex items-center space-x-3 mt-2 md:mt-0">
+          <div className="border rounded-lg">
+            <input
+              type="text"
+              placeholder="Search..."
+              className="px-3 py-1 rounded-md text-green-500"
+            />
+          </div>
+          <a
+            href="/login"
+            className="px-4 py-2 bg-green-700 text-white font-semibold rounded-lg shadow-md hover:bg-green-500 transition duration-300"
+          >
+            Join Us
+          </a>
         </div>
             {/* Mobile Menu Button */}
         <button
@@ -132,7 +140,7 @@ const OurOfferings = () => {
         <ul className="flex flex-col space-y-4 mt-6 px-4 text-lg">
           <li><a href="/" className="hover:text-orange-300" onClick={() => setSidebarOpen(false)}>Home</a></li>
           <li><a href="/ourStory" className="hover:text-orange-300" onClick={() => setSidebarOpen(false)}>Our Story</a></li>
-          <li><a href="/ourOfferings" className="hover:text-orange-300" onClick={() => setSidebarOpen(false)}>Our Offerings</a></li>
+          <li><a href="/ourOfferings" className="hover:text-orange-300" onClick={() => setSidebarOpen(false)}>Our Products</a></li>
           <li><a href="/NewsPage" className="hover:text-orange-300" onClick={() => setSidebarOpen(false)}>News</a></li>
           <li><a href="/ContactUspage" className="hover:text-orange-300" onClick={() => setSidebarOpen(false)}>Contact Us</a></li>
         </ul>
@@ -172,7 +180,7 @@ const OurOfferings = () => {
 
       {/* OFFERINGS GRID */}
       <section className="py-16 px-6 bg-gray-100">
-        <h2 className="text-4xl font-bold text-center mb-12">Our Offerings</h2>
+        <h2 className="text-4xl font-bold text-center mb-12">Our Products</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {offerings.map((item, index) => (
             <div
@@ -182,7 +190,7 @@ const OurOfferings = () => {
               <img
                 src={item.url}
                 alt={item.title}
-                className="w-full h-56 object-cover"
+                className="w-full h-80 object-fix"
               />
               <div className="p-6 flex flex-col justify-between h-52">
                 <div>
