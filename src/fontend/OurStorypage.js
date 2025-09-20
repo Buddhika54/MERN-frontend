@@ -94,7 +94,7 @@ const OurStory = () => {
             />
           </div>
           <a
-            href="/login"
+            href="/join"
             className="px-4 py-2 bg-green-700 text-white font-semibold rounded-lg shadow-md hover:bg-green-500 transition duration-300"
           >
             Join Us

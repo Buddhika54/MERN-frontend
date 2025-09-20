@@ -160,7 +160,7 @@ const Home = () => {
         className="relative bg-fixed bg-cover bg-center py-16 px-6 mt-1"
         style={{
           backgroundImage:
-            "url('https://theportuguesetraveler.com/wp-content/uploads/2024/11/halpewatte-tea-factory-tour-halpe-ella-sri-lanka-65.jpg.webp')",
+            "url('https://i.pinimg.com/736x/10/bd/6b/10bd6bf2c6b99ce1ce927ed2eb3873b3.jpg')",
         }}
       >
         <div className="bg-black/80  bg-opacity-70 max-w-5xl mx-auto rounded-lg shadow-lg p-10 space-y-8 text-white">
@@ -214,11 +214,19 @@ const Home = () => {
       </section>
 
       {/* OUR OFFERINGS */}
-      <section id="offerings" className="py-16 px-6 bg-white">
-        <h2 className="text-3xl font-bold text-center mb-12">Our Offerings</h2>
+      <section id="offerings" className="py-16 px-6 "
+        style={{
+          backgroundImage:
+            "url('https://i.pinimg.com/736x/10/bd/6b/10bd6bf2c6b99ce1ce927ed2eb3873b3.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+        
+      >
+        <h2 className="text-3xl font-bold text-center mb-12 text-white">Our Offerings</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-            <a href="/green-tea">
+            <a href="/greentea">
               <img
                 src="https://www.theteapalace.co.uk/cdn/shop/files/Green_TopDown_2.jpg?v=1708964869&width=1500"
                 alt="Green Tea"
@@ -231,7 +239,7 @@ const Home = () => {
             </div>
           </div>
           <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-            <a href="/green-tea">
+            <a href="/blacktea">
               <img
                 src="https://rareteacompany.com/cdn/shop/products/Rare-Tea-Company-Rare-Sri-Lankan-Black-1200px-4.jpg?v=1748622897"
                 alt="Black Tea"
@@ -244,7 +252,7 @@ const Home = () => {
             </div>
           </div>
           <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-            <a href="/green-tea">
+            <a href="/herbal">
               <img
                 src="https://teacultureoftheworld.com/cdn/shop/articles/Blog-june-5-665x300_972465a5-63c7-4e46-9c93-c5321ccdf2a3.jpg?v=1670000322&width=600"
                 alt="Herbal Tea"
