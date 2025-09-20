@@ -1,0 +1,84 @@
+
+.dashboard {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Page Title */
+.page-header h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+}
+
+/* Statistic Cards */
+.cards-container {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.cards-container > div {
+  flex: 1 1 0;
+  min-width: 150px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  backdrop-filter: blur(6px);
+  font-weight: bold;
+  color: #000;
+}
+
+/* Highlight low stock */
+.cards-container > div.warning {
+  border-top: 5px solid red;
+}
+
+/* Charts Container */
+.charts-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Chart Card Styling */
+.chart-card {
+  background-color: rgba(255, 255, 255, 0.65);
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  flex: 1 1 450px;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  backdrop-filter: blur(12px);
+}
+
+/* Chart Titles */
+.chart-card h3 {
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+}
+
+/* Chart Canvas */
+.chart-card canvas {
+  width: 100% !important;
+  height: 300px !important;
+}

@@ -1,0 +1,78 @@
+.warehouse-list-container {
+  padding: 20px;
+  min-height: 100vh;
+  background-color: #f5f5f54b;
+  display: flex;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+}
+
+.warehouse-card {
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 20px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 1000px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.warehouse-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.warehouse-table th,
+.warehouse-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.warehouse-table th {
+  background-color: rgba(40, 167, 69, 0.1);
+}
+
+.warehouse-table tbody tr:hover {
+  background-color: rgba(40, 167, 69, 0.05);
+}
+
+.add-btn {
+  padding: 8px 16px;
+  background-color: rgba(40, 167, 69, 0.85);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+.add-btn:hover {
+  background-color: rgba(33, 136, 56, 0.9);
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+  margin: 0 3px;
+}
+
+.edit-btn {
+  background-color: #28a745;
+}
+
+.edit-btn:hover {
+  background-color: #218838;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+}
+
+.delete-btn:hover {
+  background-color: #b02a37;
+}

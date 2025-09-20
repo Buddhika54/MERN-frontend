@@ -1,0 +1,30 @@
+.card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  text-align: center;
+  min-width: 180px;
+  margin: 10px;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.card p {
+  margin: 0;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.card.warning {
+  border-left: 5px solid #dc3545;
+}

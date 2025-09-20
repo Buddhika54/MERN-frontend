@@ -1,0 +1,14 @@
+.low-stock-page { padding: 20px; }
+
+.low-stock-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: rgba(255,255,255,0.8);
+  border-radius: 12px;
+}
+
+.low-stock-table th, .low-stock-table td { padding: 12px; text-align: left; }
+
+.low-stock-table th { background-color: rgba(46,125,50,0.8); color: #fff; }
+
+.low-stock-table tr:nth-child(even) { background-color: rgba(0,0,0,0.05); }

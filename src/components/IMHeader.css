@@ -1,0 +1,44 @@
+.header-container {
+  position: fixed;
+  top: 0;
+  left: 250px; /* after sidebar */
+  width: calc(100% - 250px);
+  height: 60px;
+  background-color: #2e7d32;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding-left: 20px; /* left padding for "Welcome!" */
+  z-index: 1000;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.header-left h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+/* Push the right section to the far right */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* space between name and profile pic */
+  margin-left: auto; /* push right section to right */
+  margin-right: 50px; /* fixed 50px space from right edge */
+}
+
+/* User name styling */
+.profile-name {
+  font-weight: 500;
+  font-size: 16px;
+}
+
+/* Profile pic container */
+.profile-pic svg {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: white;
+  color: #2e7d32;
+  padding: 2px;
+}

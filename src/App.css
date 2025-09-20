@@ -1,0 +1,73 @@
+/* Remove default spacing */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* Flex layout for sidebar + content */
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px; 
+  background-color: #2e7d32;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* Sidebar title */
+.sidebar-title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  margin: 0;
+  padding: 20px 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Sidebar menu */
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+}
+
+.sidebar-menu li {
+  margin: 0;
+}
+
+.sidebar-link {
+  display: block;
+  padding: 15px 20px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.sidebar-link:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+.sidebar-link.active {
+  background-color: #81c784;
+  color: black;
+  font-weight: bold;
+}
+
+/* Main content */
+.main-content {
+  flex: 1;
+  background-color: #f5f5dc;
+  padding: 20px;
+  overflow-y: auto;
+}

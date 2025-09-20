@@ -1,0 +1,29 @@
+.notifications-page { padding: 20px; }
+
+.notif-list {
+  list-style: none;
+  padding: 0;
+}
+
+.notif-list li {
+  padding: 12px;
+  margin-bottom: 10px;
+  background-color: rgba(255,255,255,0.8);
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notif-list li.unread { border-left: 5px solid #dc3545; }
+
+.notif-list li button {
+  padding: 4px 10px;
+  border: none;
+  background-color: #2e7d32;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.notif-list li button:hover { background-color: #1b5e20; }

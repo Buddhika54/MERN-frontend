@@ -1,0 +1,39 @@
+.inventory-flow-container {
+  padding: 20px;
+  min-height: 100vh;
+  background-color: #f5f5f54b;
+  display: flex;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+}
+
+.inventory-flow-card {
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 20px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 1000px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.flow-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.flow-table th,
+.flow-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.flow-table th {
+  background-color: rgba(46,125,50,0.8);
+  color: #fff;
+}
+
+.flow-table tbody tr:hover {
+  background-color: rgba(46,125,50,0.05);
+}

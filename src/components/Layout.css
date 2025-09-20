@@ -1,0 +1,67 @@
+/* Full background for entire app */
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  background: url("/teastate.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(46, 125, 50, 0.85); /* green + semi-transparent */
+  color: white;
+  padding-top: 60px; /* space for header */
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  backdrop-filter: blur(5px);
+}
+
+/* Sidebar links */
+.sidebar-title { text-align:center; font-weight:bold; font-size:20px; margin-bottom:20px; }
+.sidebar-menu { list-style:none; padding:0; margin:0; }
+.sidebar-link { display:block; padding:15px 20px; color:white; text-decoration:none; transition:0.2s; }
+.sidebar-link.active, .sidebar-link:hover { background-color: rgba(255,255,255,0.2); color:black; }
+
+/* Header */
+.header {
+  position: fixed;
+  top: 0;
+  left: 250px; /* sidebar width */
+  width: calc(100% - 250px);
+  height: 60px;
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+/* Main content area */
+.main-content {
+  margin-left: 250px; /* leave space for sidebar */
+  margin-top: 60px;   /* leave space for header */
+  padding: 20px;
+  width: calc(100% - 250px);
+  min-height: calc(100vh - 60px);
+  box-sizing: border-box;
+  color: #000;
+}
+
+/* Dashboard cards example */
+.dashboard {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 20px;
+  background-color: rgba(255,255,255,0.5); /* semi-transparent so bg shows */
+  border-radius: 12px;
+}
