@@ -1,0 +1,57 @@
+.add-machine-form {
+  max-width: 24rem;
+  margin: 2.5rem auto;
+  background: rgb(134, 244, 134);
+  padding: 2rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.add-machine-form h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  
+  margin-bottom: 1.5rem;
+}
+
+.form-field {
+  margin-bottom: 1rem;
+}
+
+.form-field label {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  color: #374151;
+}
+
+.form-field input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+}
+
+.add-machine-form button {
+  width: 100%;
+  margin-top: 1.5rem;
+  background-color: #0d9488;
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+}
+
+.add-machine-form button:hover {
+  background-color: #0f766e;
+}
+
+.form-field select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  background-color: white;
+}
