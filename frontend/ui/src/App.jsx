@@ -1,13 +1,13 @@
 // src/App.jsx
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { apiFetch } from "./utils/api";
 
 // Layout
-import TopNav from "./components/ui/TopNav";
-import Sidebar from "./components/ui/Sidebar";
+import AdminLayout from "./layouts/AdminLayout";
+import CustomerLayout from "./layouts/CustomerLayout";
 
 // Orders
 import OrdersList from "./components/Orders/OrdersList";
@@ -28,6 +28,9 @@ import InvoiceForm from "./components/Invoices/InvoiceForm";
 
 // Accessories
 import Accessories from "./components/Accessories/Accessories";
+
+// Admin Sales
+import Sales from "./components/Admin/Sales";
 
 // Customer customer
 import CustomerDashboard from "./pages/customer/CustomerDashboard";
@@ -59,52 +62,40 @@ function AppInner() {
     fetchOrders();
   }, []);
 
-  const accessoriesPage = location.pathname.startsWith("/accessories");
-
   return (
     <>
       <ToastContainer position="top-right" autoClose={2500} newestOnTop closeOnClick pauseOnHover />
-      <TopNav />
-      <div className="flex">
-        {/* Sidebar on the left */}
-        <Sidebar />
+      <Routes>
+        {/* Redirect root and legacy paths */}
+        <Route path="/" element={<Navigate to="/customer/dashboard" replace />} />
+        <Route path="/dashboard" element={<Navigate to="/customer/dashboard" replace />} />
+        <Route path="/orders/*" element={<Navigate to="/admin/orders" replace />} />
+        <Route path="/pickups/*" element={<Navigate to="/admin/pickups" replace />} />
+        <Route path="/auctions/*" element={<Navigate to="/admin/auctions" replace />} />
+        <Route path="/invoices/*" element={<Navigate to="/admin/invoices" replace />} />
+        <Route path="/accessories" element={<Navigate to="/customer/accessories" replace />} />
+        {/* Admin area */}
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route path="dashboard" element={<Sales />} />
+          <Route path="orders" element={<OrdersList orders={orders} refreshOrders={fetchOrders} />} />
+          <Route path="orders/new" element={<OrderForm refreshOrders={fetchOrders} />} />
+          <Route path="orders/:id" element={<OrderDetails />} />
+          <Route path="pickups" element={<PickupsList orders={orders} />} />
+          <Route path="pickups/new" element={<PickupForm orders={orders} />} />
+          <Route path="auctions" element={<AuctionsList />} />
+          <Route path="auctions/new" element={<AuctionForm />} />
+          <Route path="invoices" element={<InvoicesList />} />
+          <Route path="invoices/new" element={<InvoiceForm />} />
+          <Route path="sales" element={<Sales />} />
+        </Route>
 
-        {/* Main content area; make transparent on accessories page */}
-        <main className="main-container flex-1" style={accessoriesPage ? { background: "transparent", boxShadow: "none" } : undefined}>
-          <Routes>
-            {/* Orders */}
-            <Route
-              path="/orders"
-              element={<OrdersList orders={orders} refreshOrders={fetchOrders} />}
-            />
-            <Route
-              path="/orders/new"
-              element={<OrderForm refreshOrders={fetchOrders} />}
-            />
-            <Route path="/orders/:id" element={<OrderDetails />} />
-
-            {/* Pickups */}
-            <Route path="/pickups" element={<PickupsList orders={orders} />} />
-            <Route path="/pickups/new" element={<PickupForm orders={orders} />} />
-
-            {/* Auctions */}
-            <Route path="/auctions" element={<AuctionsList />} />
-            <Route path="/auctions/new" element={<AuctionForm />} />
-
-            {/* Tea Accessories */}
-            <Route path="/accessories" element={<Accessories />} />
-
-            {/* Invoices */}
-            <Route path="/invoices" element={<InvoicesList />} />
-            <Route path="/invoices/new" element={<InvoiceForm />} />
-
-            {/* Dashboard (optional route) */}
-            <Route path="/dashboard" element={<CustomerDashboard />} />
-            {/* Customer Auctions */}
-            <Route path="/customer/auctions" element={<CustomerAuctions />} />
-          </Routes>
-        </main>
-      </div>
+        {/* Customer area */}
+        <Route path="/customer" element={<CustomerLayout />}>
+          <Route path="dashboard" element={<CustomerDashboard />} />
+          <Route path="auctions" element={<CustomerAuctions />} />
+          <Route path="accessories" element={<Accessories />} />
+        </Route>
+      </Routes>
     </>
   );
 }

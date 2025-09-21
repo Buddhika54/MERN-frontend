@@ -1,25 +1,15 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { MdDashboard, MdShoppingCart, MdLocalShipping, MdGavel, MdReceiptLong, MdLocalMall } from "react-icons/md";
+import { MdDashboard, MdShoppingCart, MdLocalShipping, MdGavel, MdReceiptLong, MdPeople } from "react-icons/md";
 
 const Sidebar = () => {
   return (
     <div className="sidebar">
-      <h2 className="sidebar-title">Sales, Orders and Dispatch</h2>
+      <h2 className="sidebar-title">Admin Portal</h2>
       <ul className="sidebar-menu">
         <li>
           <NavLink
-            to="/dashboard"
-            className={({ isActive }) =>
-              "sidebar-link" + (isActive ? " active" : "")
-            }
-          >
-            <MdDashboard className="me-2" /> Dashboard
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/orders"
+            to="/admin/orders"
             className={({ isActive }) =>
               "sidebar-link" + (isActive ? " active" : "")
             }
@@ -29,7 +19,7 @@ const Sidebar = () => {
         </li>
         <li>
           <NavLink
-            to="/pickups"
+            to="/admin/pickups"
             className={({ isActive }) =>
               "sidebar-link" + (isActive ? " active" : "")
             }
@@ -39,7 +29,7 @@ const Sidebar = () => {
         </li>
         <li>
           <NavLink
-            to="/auctions"
+            to="/admin/auctions"
             className={({ isActive }) =>
               "sidebar-link" + (isActive ? " active" : "")
             }
@@ -49,32 +39,32 @@ const Sidebar = () => {
         </li>
         <li>
           <NavLink
-            to="/customer/auctions"
+            to="/admin/sales"
             className={({ isActive }) =>
               "sidebar-link" + (isActive ? " active" : "")
             }
           >
-            <MdGavel className="me-2" /> Customer Auctions
+            <MdDashboard className="me-2" /> Sales
           </NavLink>
         </li>
         <li>
           <NavLink
-            to="/accessories"
-            className={({ isActive }) =>
-              "sidebar-link" + (isActive ? " active" : "")
-            }
-          >
-            <MdLocalMall className="me-2" /> Tea Accessories
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/invoices"
+            to="/admin/invoices"
             className={({ isActive }) =>
               "sidebar-link" + (isActive ? " active" : "")
             }
           >
             <MdReceiptLong className="me-2" /> Invoices
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/customer/dashboard"
+            className={({ isActive }) =>
+              "sidebar-link" + (isActive ? " active" : "")
+            }
+          >
+            <MdPeople className="me-2" /> Customer
           </NavLink>
         </li>
       </ul>
