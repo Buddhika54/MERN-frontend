@@ -1,0 +1,17 @@
+.layout {
+  display: flex; /* Sidebar + Main next to each other */
+}
+
+/* Right side (navbar + content) */
+.main {
+  flex: 1; 
+  margin-left: 16rem; /* same as sidebar width */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Push content below navbar */
+.content {
+  margin-top: 3rem; /* same as navbar height */
+  padding: 1.5rem; 
+}

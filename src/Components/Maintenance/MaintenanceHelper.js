@@ -1,6 +1,7 @@
 
  import {  useNavigate } from "react-router-dom"
   import axios from 'axios'
+  import './List.css'
 
  export const columns=[
     
@@ -69,11 +70,11 @@ export const MaintenanceButtons = ({id, onMaintenanceDelete}) =>{
 
      
     return(
-        <div>
+        <div className="action-buttons">
             <button onClick={()=>navigate(`/home/maintenance/${id}`)}className="edit-btn">Edit</button>
             <button onClick={handleDelete}className="delete-btn">Delete</button>
             <button  onClick={() => navigate("/home/add-technician")}className="tech-btn">Technicians</button>
-            <button className="repo-btn">Reports</button>
+            <button className="repo-btn">Records</button>
         </div>
     )
 

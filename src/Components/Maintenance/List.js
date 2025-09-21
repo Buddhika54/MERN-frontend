@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom'
 import '../MachinesList.css'
 import {  columns,MaintenanceButtons } from './MaintenanceHelper'
 import axios from 'axios'
+import SideBar from '../SideBar'
+import Navbar from '../Navbar'
+import './List.css'
+import '../MachineHelper.css'
+
 
 
 function List() {
@@ -90,16 +95,20 @@ function List() {
   )
 
   return (
-    <div>
-      <div className="machines-header">
+    <div className="page-container">
+      <SideBar />
+      <div className="page-main1">
+        <Navbar />
+    <div className="listContainer1">
+      <div className="listHeader">
              <h3 >Manage Maintenance</h3>
         </div>  
-        <div className="machines-actions">
+        <div className="listActions">
             <input type="text" placeholder="Search by priority" className="px-4 py-0.5 border"value={searchPriority} onChange={(e) => setSearchPriority(e.target.value)} />
-            <Link to="/home/add-maintenance" className="add-machine-btn">Add New Maintenance</Link>
+            <Link to="/home/add-maintenance" className="list-add-btn">Add New Maintenance</Link>
         </div>
         <div>
-                  <table className="machines-table">
+                  <table className="listTable">
                     <thead>
                       <tr>
                         {columns.map((column, index) => (
@@ -119,6 +128,8 @@ function List() {
                   </table>
                   
                 </div>
+    </div>
+    </div>
     </div>
   )
 }

@@ -9,7 +9,11 @@ import EditMachine from './Components/EditMachine';
 import List from './Components/Maintenance/List';
 import Add from './Components/Maintenance/Add';
 import Edit from './Components/Maintenance/Edit';
-import AddT from './Components/Technician/AddT';
+import AddT from './Components/Maintenance/AddT';
+import ListT from './Components/Technician/ListT';
+import NewTech from './Components/Technician/NewTech';
+import EditT from './Components/Technician/EditT';
+import AssignList from './Components/Assign/AssignList';
 
 function App() {
   return (
@@ -30,7 +34,11 @@ function App() {
           <Route path="/home/maintenance/:id" element={<Edit/>}/>
 
           <Route path="/home/add-technician" element={<AddT/>}/>
+          <Route path="/home/technician" element={<ListT/>}/>
+          <Route path="/home/new-technician" element={<NewTech/>}/>
+          <Route path="/home/technician/:id" element={<EditT/>}/>
           
+          <Route path="/home/assign" element={<AssignList/>}/>
         </Routes>
       </BrowserRouter>
 

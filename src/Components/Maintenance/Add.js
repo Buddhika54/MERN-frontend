@@ -115,6 +115,8 @@ function Add() {
                         name="description" 
                         onChange={handleChange}
                         required 
+                        pattern="^[A-Za-z\s]{2,50}$"  // Only letters and spaces, 2-10 chars
+        title="Name should contain only letters and spaces (2-50 characters)"
                     />
                 </div>
                 <div className="form-field">

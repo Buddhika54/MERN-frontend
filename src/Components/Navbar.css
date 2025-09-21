@@ -4,9 +4,10 @@
   align-items: center; /* Tailwind items-center */
   justify-content: space-between; /* Tailwind justify-between */
   height: 3rem; /* Tailwind h-12 */
-  background-color: #0d9488; /* Tailwind bg-teal-600 */
+  background-color: #065f46; /* Tailwind bg-teal-600 */
   padding: 0 1.25rem; /* Tailwind px-5 */
   color: white; /* Tailwind text-white */
+  
 }
 
 /* Welcome text */

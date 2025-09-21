@@ -4,7 +4,8 @@ import '../MachinesList.css'
 import { columns, MachineButtons } from '../MachineHelper'
 import axios from 'axios'
 import SideBar from '../SideBar'
-import Navbar from '../Navbar'
+import Navbar from '../Navbar'   // ✅ import Navbar
+
 
 
 function MachinesList() {
@@ -71,9 +72,11 @@ function MachinesList() {
   
   
   return (
+    <div className="machines-main">
+        <Navbar />
     <div className="machines-container">
       <SideBar/>
-      <Navbar/>
+            {/* ✅ add Navbar here */}
         <div className="machines-header">
              <h3 >Manage Machines</h3>
         </div>  
@@ -101,6 +104,7 @@ function MachinesList() {
             </tbody>
           </table>
           
+        </div>
         </div>
     </div>
   )

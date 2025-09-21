@@ -8,6 +8,7 @@
   cursor: pointer;
   transition: all 0.2s;
   margin-right: 0.5rem; /* Space between buttons */
+  
 }
 
 .edit-btn:last-child, .delete-btn:last-child {
@@ -36,6 +37,8 @@
 .machines-table td:last-child {
   display: flex;
   gap: 0.5rem; /* Space between buttons */
+  justify-content: center; /* Center horizontally */
+  align-items: center;     /* Center vertically */
 }
 
 
@@ -73,3 +76,12 @@
   background-color: rgb(26, 122, 178); /* Darker red on hover */
 }
 
+
+
+/* Horizontal buttons in Action column */
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+}

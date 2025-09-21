@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import '../AddMachines.css'
 
+
 function AddMachines() {
     const [machine, setMachine] = useState({
         name: '',
@@ -40,18 +41,23 @@ function AddMachines() {
     }
 
     return (
+       
+      
         <div className="add-machine-form">
             <h2>Add New Machine</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-field">
-                    <label >Machine Name</label>
-                    <input 
-                        type="text" 
-                        name="name" 
-                        onChange={handleChange} 
-                        required 
-                    />
-                </div>
+    <label>Machine Name</label>
+    <input 
+        type="text" 
+        name="name" 
+        onChange={handleChange} 
+        required
+        pattern="^[A-Za-z0-9]{1,10}$"
+        title="Machine name can only contain letters and numbers (no spaces, max 10 characters)"
+    />
+</div>
+
                 <div className="form-field">
                     <label >Machine Type</label>
                     <input 
@@ -59,6 +65,8 @@ function AddMachines() {
                         name="type" 
                         onChange={handleChange} 
                         required 
+                        pattern="^[A-Za-z\s]{2,10}$"  // Only letters and spaces, 2-10 chars
+        title="Name should contain only letters and spaces (2-10 characters)"
                     />
                 </div>
                 <div className="form-field">
@@ -96,6 +104,7 @@ function AddMachines() {
                 </button>
             </form>
         </div>
+       
     )
 }
 

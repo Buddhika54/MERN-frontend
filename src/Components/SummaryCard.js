@@ -11,8 +11,8 @@ function SummaryCard({icon,text,number,color}) {
        
       
       <div className="summary-content">
-        <p className="summary-text">{text}</p>
-        <p className="summary-number">{number}</p>
+        <p className="summary-text text-green">{text}</p>
+        <p className="summary-number text-green">{number}</p>
       </div>
     </div>
   )

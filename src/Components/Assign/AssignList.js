@@ -1,34 +1,26 @@
+import React, {  useEffect, useState } from 'react'
 
-import React, {useCallback, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import '../MachinesList.css'
-import {  columns,TechnicianButtons } from './TechHelp'
+import {  columns,AssignButtons } from './AssignHelp'
 import axios from 'axios'
 import SideBar from '../SideBar'
 import Navbar from '../Navbar'
 
 import '../MachineHelper.css'
 
+function AssignList() {
 
+    const [assign, setAssign] = useState(null)
+    const [loading, setLoading] = useState(true)
+     const [error, setError] = useState(null)
 
-function ListT() {
-    const [technician, setTechnician] = useState(null)
-      const [loading, setLoading] = useState(true)
-      const [error, setError] = useState(null)
-      
-      const onTechnicianDelete = useCallback((id) => {
-         setTechnician(prev => prev.filter(technician => technician._id !== id))
-       }, []) // no dependencies since it only depends on setMachine
-
-      
-
-     useEffect(()=>{
-    const fetchTechnician=async()=>{
+      useEffect(()=>{
+    const fetchAssign=async()=>{
       try{
          setLoading(true)
          setError(null)
 
-        const response= await axios.get('http://localhost:5000/Technician',{
+        const response= await axios.get('http://localhost:5000/Assign',{
           headers: {
             "Authorization":`Bearer ${localStorage.getItem('token')}`
           }
@@ -36,25 +28,23 @@ function ListT() {
         console.log("Server response:", response);
         if (response.status === 200) {
           let sno=1;
-                const data =  response.data.technicians.map((technician)=>(
+                const data =  response.data.assigns.map((assign)=>(
                   {
-                    _id:technician._id,
+                    _id:assign._id,
                     sno: sno++,
-                    name:technician.name,
-                    email:technician.email,
-                    phone:technician.phone,
-                    specialty:technician.specialty,
-                    availability:technician.availability,
-                    work:technician.work,
-                    
-                    action:(<TechnicianButtons id={technician._id} onTechnicianDelete={onTechnicianDelete} />)// Pass ID to buttons
+                    techname:assign.techname,
+                    machinename:assign.machinename,
+                    adate:assign.adate,
+                    issue:assign.issue,
+                    edate:assign.edate,
+                    action:(<AssignButtons />)
 
 
                   }
                 
 
                 ))
-                setTechnician(data);
+                setAssign(data);
             }
 
       }catch (error) {
@@ -63,18 +53,18 @@ function ListT() {
                 if (error.code === 'ECONNREFUSED') {
                     setError("Cannot connect to server. Make sure the backend is running on port 5000.");
                 } else {
-                    setError(error.response?.data?.message || "Error fetching technician")
+                    setError(error.response?.data?.message || "Error fetching assign")
                 }
       } finally {
         setLoading(false)
       }
     }
-   fetchTechnician();
+   fetchAssign();
 
-  },[onTechnicianDelete])
+  },[])
   
   if (loading) {
-    return <div className="machines-container">Loading technician...</div>
+    return <div className="machines-container">Loading assigns...</div>
   }
 
   // CHANGED: Added error display
@@ -91,22 +81,23 @@ function ListT() {
 
 
 
-      
 
 
 
   return (
-    <div className="page-container">
+    <div>
+      <div className="page-container">
       <SideBar />
       <div className="page-main">
         <Navbar />
     <div className="listContainer">
       <div className="listHeader">
-             <h3 >Manage Technicians </h3>
+             <h3 >Manage Assigned Technicians</h3>
         </div>  
         <div className="listActions">
-            <input type="text" placeholder="Search by Availability" className="px-4 py-0.5 border"  />
-            <Link to="/home/new-technician" className="list-add-btn">Add New Technician</Link>
+            <input type="text" placeholder="Search by machine Name" className="px-4 py-0.5 border" />
+            
+            
         </div>
         <div>
                   <table className="listTable">
@@ -118,7 +109,7 @@ function ListT() {
                       </tr>
                     </thead>
                     <tbody>
-                      {technician && technician.map((row, index) => (
+                      {assign && assign.map((row, index) => (
                         <tr key={index}>
                           {columns.map((column, colIndex) => (
                             <td key={colIndex}>{column.selector(row)}</td>
@@ -132,7 +123,8 @@ function ListT() {
     </div>
     </div>
     </div>
+    </div>
   )
 }
 
-export default ListT
+export default AssignList

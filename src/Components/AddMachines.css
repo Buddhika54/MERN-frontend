@@ -55,3 +55,19 @@
   border-radius: 4px;
   background-color: white;
 }
+
+/* Container holding sidebar + main content */
+.app-container {
+    display: flex;
+}
+
+/* Main content area */
+.main-content {
+    margin-left: 16rem; /* same as sidebar width */
+    width: calc(100% - 16rem);
+}
+
+/* Add top margin to push below navbar */
+.main-content .add-machine-form {
+    margin-top: 3rem; /* same as navbar height */
+}

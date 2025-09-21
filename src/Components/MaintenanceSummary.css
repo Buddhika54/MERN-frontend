@@ -7,6 +7,7 @@
 .summary-container h3 {
   font-size: 1.5rem; /* Tailwind text-2xl */
   font-weight: bold; /* Tailwind font-bold */
+  
 }
 
 /* Grid for summary cards */
