@@ -8,6 +8,7 @@ function OrderForm({ order, onClose, onSaved, refreshOrders }) {
   const [prefilledProduct, setPrefilledProduct] = useState(false);
   const [formData, setFormData] = useState({
     customerName: "",
+    customerEmail: "",
     contactNumber: "",
     product: "",
     items: 1,
@@ -114,9 +115,23 @@ function OrderForm({ order, onClose, onSaved, refreshOrders }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Email validation
+    const email = (formData.customerEmail || "").trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email)) {
+      toast.error("Valid email is required");
+      return;
+    }
+
     // Extra frontend check for contactNumber
     if (!formData.contactNumber.trim()) {
       toast.error("Contact number is required");
+      return;
+    }
+
+    // Delivery instructions required
+    if (!formData.deliveryInstructions || !formData.deliveryInstructions.trim()) {
+      toast.error("Delivery instructions are required");
       return;
     }
 
@@ -129,6 +144,7 @@ function OrderForm({ order, onClose, onSaved, refreshOrders }) {
 
       const payload = {
         customerName: formData.customerName.trim(),
+        customerEmail: email,
         contactNumber: formData.contactNumber.trim(),
         product: formData.product.trim(),
         // Quantity option removed from UI; set to 1 for all orders
@@ -177,7 +193,20 @@ function OrderForm({ order, onClose, onSaved, refreshOrders }) {
           />
         </div>
 
-        {/* Email removed as per requirements */}
+        {/* Customer Email */}
+        <div className="mb-2">
+          <input
+            type="email"
+            name="customerEmail"
+            placeholder="Email"
+            className="form-control"
+            value={formData.customerEmail}
+            onChange={handleChange}
+            required
+            pattern="[^\s@]+@[^\s@]+\.[^\s@]+"
+            title="Enter a valid email address"
+          />
+        </div>
 
         <div className="mb-2">
           <input
@@ -269,6 +298,7 @@ function OrderForm({ order, onClose, onSaved, refreshOrders }) {
             className="form-control"
             value={formData.deliveryInstructions}
             onChange={handleChange}
+            required
           ></textarea>
         </div>
 

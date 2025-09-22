@@ -40,6 +40,17 @@ export default function CustomerSidebar() {
         </li>
         <li>
           <NavLink
+            to="/customer/sales"
+            className={({ isActive }) =>
+              "sidebar-link" + (isActive ? " active" : "")
+            }
+          >
+            {/* Reuse a suitable icon; using MdDashboard for simplicity */}
+            <MdDashboard className="me-2" /> Sales Overview
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
             to="/admin/dashboard"
             className={({ isActive }) =>
               "sidebar-link" + (isActive ? " active" : "")

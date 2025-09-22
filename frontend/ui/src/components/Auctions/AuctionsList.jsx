@@ -8,6 +8,7 @@ export default function AuctionsList() {
   const [auctions, setAuctions] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [closing, setClosing] = useState({}); // { [id]: boolean }
+  const [deleting, setDeleting] = useState({}); // { [id]: boolean }
 
   const fetchAuctions = async () => {
     try {
@@ -26,6 +27,25 @@ export default function AuctionsList() {
   useEffect(() => {
     fetchAuctions();
   }, []);
+
+  const handleDelete = async (auction) => {
+    if (!auction || auction.status !== "Closed") return;
+    if (!window.confirm("Delete this closed auction? This action cannot be undone.")) return;
+    try {
+      setDeleting((s) => ({ ...s, [auction._id]: true }));
+      const data = await apiFetch(`/api/auctions/${auction._id}`, { method: "DELETE" });
+      if (data && data.success) {
+        toast.success("Auction deleted");
+        fetchAuctions();
+      } else {
+        toast.error((data && data.error) || "Failed to delete auction");
+      }
+    } catch (e) {
+      toast.error(e.message || "Error deleting auction");
+    } finally {
+      setDeleting((s) => ({ ...s, [auction._id]: false }));
+    }
+  };
 
   return (
     <div className="container mt-4">
@@ -92,6 +112,15 @@ export default function AuctionsList() {
                     }}
                   >
                     {closing[auction._id] ? "Closing…" : "Close"}
+                  </button>
+                )}
+                {auction.status === "Closed" && (
+                  <button
+                    className="btn btn-danger btn-sm"
+                    disabled={!!deleting[auction._id]}
+                    onClick={() => handleDelete(auction)}
+                  >
+                    {deleting[auction._id] ? "Deleting…" : "Delete"}
                   </button>
                 )}
               </td>

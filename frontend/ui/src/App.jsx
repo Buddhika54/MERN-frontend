@@ -35,6 +35,7 @@ import Sales from "./components/Admin/Sales";
 // Customer customer
 import CustomerDashboard from "./pages/customer/CustomerDashboard";
 import CustomerAuctions from "./pages/customer/CustomerAuctions";
+import CustomerSales from "./pages/customer/CustomerSales";
 
 function AppInner() {
   const location = useLocation();
@@ -94,6 +95,7 @@ function AppInner() {
           <Route path="dashboard" element={<CustomerDashboard />} />
           <Route path="auctions" element={<CustomerAuctions />} />
           <Route path="accessories" element={<Accessories />} />
+          <Route path="sales" element={<CustomerSales />} />
         </Route>
       </Routes>
     </>
