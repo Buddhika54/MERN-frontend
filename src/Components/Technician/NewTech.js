@@ -1,145 +1,169 @@
-import React, {  useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import axios from "axios";
-import '../AddMachines.css'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import axios from "axios"
+import Navbar from '../Navbar'
+import Sidebar from '../SideBar'
 
 function NewTech() {
+  const [technician, setTechnician] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    specialty: '',
+    availability: '',
+    work: ''
+  })
 
-     const [technician, setTechnician] = useState({
-          name: '',
-          email: '',
-          phone: '',
-          specialty:'',
-          availability: '' ,  
-          work:''
+  const navigate = useNavigate()
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setTechnician({ ...technician, [name]: value })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    console.log("Submitting technician:", technician)
+
+    try {
+      const response = await axios.post('http://localhost:5000/Technician', technician, {
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem('token')}`
+        }
       })
 
-      const navigate = useNavigate()
+      console.log("Server response:", response)
 
-       const handleChange = (e) => {
-        const { name, value } = e.target;
-        setTechnician({ ...technician, [name]: value })
+      if (response.status === 200) {
+        navigate("/home/technician")
+      }
+    } catch (error) {
+      console.error("Error:", error.response ? error.response.data : error.message)
+      alert(error.response?.data?.message || "Error adding technician")
     }
-
-        const handleSubmit = async (e) => {
-        e.preventDefault()
-
-        
-        console.log("Submitting technician:", technician);
-        try {
-            const response = await axios.post('http://localhost:5000/Technician', technician, {
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem('token')}`
-                }
-            })
-
-            console.log("Server response:", response);
-
-            if (response.status === 200) {
-                navigate("/home/technician")
-            }
-        } catch (error) {
-            console.error("Error:", error.response ? error.response.data : error.message);
-            alert(error.response?.data?.message || "Error adding technician");
-        }
-    }
-
-
-
+  }
 
   return (
-    <div className="add-machine-form">
-            <h2>Add New Technician</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="form-field">
-                    <label >Technician Name</label>
-                    <input
-                        name="name" 
-                       type="text"
-                       value={technician.name}
-                       onChange={handleChange}
-                        required
-                        pattern="^[A-Za-z\s]{2,10}$"  // Only letters and spaces, 2-10 chars
-        title="Name should contain only letters and spaces (2-10 characters)"
-                    >
-                        </input>
-            
-          
-                </div>
-                <div className="form-field">
-                    <label >E-mail</label>
-                     <input
-                        name="email" 
-                        type="email"
-                        value={technician.email}
-                        onChange={handleChange} 
-                        required
-                    >
-                        </input>
-            
-                </div>
-                <div className="form-field">
-                    <label >Phone Number</label>
-                    <input 
-                        type="text" 
-                        name="phone" 
-                        onChange={handleChange} 
-                       value={technician.phone}
-                        required 
-                        pattern="[0-9]{10}"   // Only 10 digits allowed
-        title="Phone number must be 10 digits"
-        placeholder="0123456789"
-                    />
-                </div>
-                <div className="form-field">
-                    <label >Specialty</label>
-                    <input 
-                        type="text" 
-                        name="specialty" 
-                        value={technician.specialty}
-                        onChange={handleChange}
-                        required 
-                        pattern="^[A-Za-z\s]{2,50}$"  // Only letters and spaces, 2-10 chars
-        title="Name should contain only letters and spaces (2-50 characters)"
-                    />
-                </div>
-               <div className="form-field">
-    <label>Availability</label>
-    <select
-        name="availability"
-        value={technician.availability}
-        onChange={handleChange}
-        required
-    >
-        <option value="">-- Select Availability --</option>
-        <option value="Available">available</option>
-       
-        <option value="On Leave">not-available</option>
-    </select>
-</div>
+    <div className="flex">
+      {/* Sidebar */}
+      <Sidebar />
 
-<div className="form-field">
-    <label>Work</label>
-    <select
-        name="work"
-        value={technician.work}
-        onChange={handleChange}
-        required
-    >
-        <option value="">-- Select Work --</option>
-        <option value="Maintenance">assigned</option>
-        <option value="Repair">not-assigned</option>
-        
-    </select>
-</div>
+      {/* Main content */}
+      <div className="flex-1 ml-64 flex flex-col bg-[#b5fcca] min-h-screen">
+        {/* Navbar */}
+        <Navbar />
 
-                <button 
-                    type="submit"
+        {/* Form */}
+        <div className="flex justify-center items-center flex-1 p-6">
+          <div className="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
+            <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
+              Add New Technician
+            </h2>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Technician Name */}
+              <div>
+                <label className="block text-gray-700 font-medium mb-1">Technician Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={technician.name}
+                  onChange={handleChange}
+                  required
+                  pattern="^[A-Za-z\s]{2,10}$"
+                  title="Name should contain only letters and spaces (2-10 characters)"
+                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
+                />
+              </div>
+
+              {/* Email */}
+              <div>
+                <label className="block text-gray-700 font-medium mb-1">E-mail</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={technician.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
+                />
+              </div>
+
+              {/* Phone */}
+              <div>
+                <label className="block text-gray-700 font-medium mb-1">Phone Number</label>
+                <input
+                  type="text"
+                  name="phone"
+                  value={technician.phone}
+                  onChange={handleChange}
+                  required
+                  pattern="[0-9]{10}"
+                  title="Phone number must be 10 digits"
+                  placeholder="0123456789"
+                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
+                />
+              </div>
+
+              {/* Specialty */}
+              <div>
+                <label className="block text-gray-700 font-medium mb-1">Specialty</label>
+                <input
+                  type="text"
+                  name="specialty"
+                  value={technician.specialty}
+                  onChange={handleChange}
+                  required
+                  pattern="^[A-Za-z\s]{2,50}$"
+                  title="Specialty should contain only letters and spaces (2-50 characters)"
+                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
+                />
+              </div>
+
+              {/* Availability */}
+              <div>
+                <label className="block text-gray-700 font-medium mb-1">Availability</label>
+                <select
+                  name="availability"
+                  value={technician.availability}
+                  onChange={handleChange}
+                  required
+                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
                 >
-                    Add Technician
-                </button>
+                  <option value="">-- Select Availability --</option>
+                  <option value="available">Available</option>
+                  <option value="not-available">Not Available</option>
+                </select>
+              </div>
+
+              {/* Work */}
+              <div>
+                <label className="block text-gray-700 font-medium mb-1">Work</label>
+                <select
+                  name="work"
+                  value={technician.work}
+                  onChange={handleChange}
+                  required
+                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
+                >
+                  <option value="">-- Select Work --</option>
+                  <option value="assigned">Assigned</option>
+                  <option value="not-assigned">Not Assigned</option>
+                </select>
+              </div>
+
+              {/* Submit */}
+              <button
+                type="submit"
+                className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md transition"
+              >
+                Add Technician
+              </button>
             </form>
+          </div>
         </div>
+      </div>
+    </div>
   )
 }
 

@@ -1,123 +1,172 @@
-import React, { useState } from 'react'
-import '../AddMachines.css'
-import {  useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import Navbar from '../Navbar'
+import Sidebar from '../SideBar'
 
 function AddT() {
+    const navigate = useNavigate();
+     const location = useLocation();
 
-  
+    // Extract maintenance ID from URL
+    const queryParams = new URLSearchParams(location.search);
+    const maintenanceId = queryParams.get('id');
 
-  const navigate = useNavigate();
-
-
-  const [formData, setFormData] = useState({
-    techname: "",
-    machinename: "",
-    adate: "",
-    issue: "",
-    edate: ""
-  });
-
-   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
+    const [formData, setFormData] = useState({
+        techname: "",
+        machinename: "",
+        adate: "",
+        issue: "",
+        edate: ""
     });
-  };
 
-  const handleSubmit = async(e) => {
-    e.preventDefault();
+    // Fetch maintenance details if id is provided
+    useEffect(() => {
+        const fetchMaintenance = async () => {
+            if (!maintenanceId) return;
+            try {
+                const response = await axios.get(`http://localhost:5000/Maintenance/${maintenanceId}`, {
+                    headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` },
+                });
 
-    // ✅ here you can send data to backend using axios/fetch if needed
-     try {
-      // ✅ send data to backend
-      await axios.post("http://localhost:5000/Assign", formData, {
-        headers: {
-          "Authorization": `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+                if (response.status === 200) {
+                    const m = response.data.maintenance;
+                    // Auto-fill machine name and issue
+                    setFormData(prev => ({
+                        ...prev,
+                        machinename: m.machineName || "",
+                        issue: m.description || ""
+                    }));
+                }
+            } catch (error) {
+                console.error("Error fetching maintenance details:", error.response ? error.response.data : error.message);
+            }
+        };
+
+        fetchMaintenance();
+    }, [maintenanceId]);
 
 
-    // after successful submit → navigate to List.js
-    navigate("/home/maintenance"); 
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
 
-     } catch (error) {
-      console.error("Error saving assign:", error.response ? error.response.data : error.message);
-    }
-  };
-  
-  return (
-    <div className="add-machine-form">
-            <h2>Add Technician</h2>
-            <form onSubmit={handleSubmit} >
-                <div className="form-field">
-                    <label >Technician Name</label>
-                    <input 
-                        name="techname"
-            value={formData.techname}
-            onChange={handleChange}
-            required
-            pattern="^[A-Za-z\s]{2,10}$"  // Only letters and spaces, 2-10 chars
-        title="Name should contain only letters and spaces (2-10 characters)"
-                    />
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await axios.post("http://localhost:5000/Assign", formData, {
+                headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` },
+            });
+            navigate("/home/maintenance");
+        } catch (error) {
+            console.error("Error saving assign:", error.response ? error.response.data : error.message);
+        }
+    };
+
+    return (
+        <div className="flex">
+            {/* Sidebar */}
+            <Sidebar />
+
+            {/* Main content */}
+            <div className="flex-1 ml-64 flex flex-col bg-[#b5fcca] min-h-screen">
+                {/* Navbar */}
+                <Navbar />
+
+                {/* Form */}
+                <div className="flex justify-center items-center flex-1 p-6">
+                    <div className="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
+                        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Add Technician Assignment</h2>
+                        <form onSubmit={handleSubmit} className="space-y-4">
+
+                            {/* Technician Name */}
+                            <div>
+                                <label className="block text-gray-700 font-medium mb-1">Technician Name</label>
+                                <input
+                                    type="text"
+                                    name="techname"
+                                    value={formData.techname}
+                                    onChange={handleChange}
+                                    required
+                                    pattern="^[A-Za-z\s]{2,10}$"
+                                    title="Name should contain only letters and spaces (2-10 characters)"
+                                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
+                                />
+                            </div>
+
+                            {/* Machine Name */}
+                            <div>
+                                <label className="block text-gray-700 font-medium mb-1">Machine Name</label>
+                                <input
+                                    type="text"
+                                    name="machinename"
+                                    value={formData.machinename}
+                                    onChange={handleChange}
+                                    required
+                                     pattern="^[A-Za-z0-9\\s]{2,20}$"
+                                    title="Machine name can contain letters, numbers, and spaces (2–20 characters)"
+                                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
+                                />
+                            </div>
+
+                            {/* Assign Date */}
+                            <div>
+                                <label className="block text-gray-700 font-medium mb-1">Assign Date</label>
+                                <input
+                                    type="date"
+                                    name="adate"
+                                    value={formData.adate}
+                                    onChange={handleChange}
+                                    required
+                                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
+                                />
+                            </div>
+
+                            {/* Issue */}
+                            <div>
+                                <label className="block text-gray-700 font-medium mb-1">Issue</label>
+                                <input
+                                    type="text"
+                                    name="issue"
+                                    value={formData.issue}
+                                    onChange={handleChange}
+                                    required
+                                    pattern="^[A-Za-z\s]{2,50}$"
+                                    title="Issue should contain only letters and spaces (2-50 characters)"
+                                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
+                                />
+                            </div>
+
+                            {/* Maintenance End Date */}
+                            <div>
+                                <label className="block text-gray-700 font-medium mb-1">Maintenance End Date</label>
+                                <input
+                                    type="date"
+                                    name="edate"
+                                    value={formData.edate}
+                                    onChange={handleChange}
+                                    required
+                                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
+                                />
+                            </div>
+
+                            {/* Submit */}
+                            <button
+                                type="submit"
+                                className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md transition"
+                            >
+                                Assign
+                            </button>
+
+                        </form>
+                    </div>
                 </div>
-                <div className="form-field">
-                    <label >Machine Name</label>
-                    <input 
-                        name="machinename"
-            value={formData.machinename}
-            onChange={handleChange}
-            required
-            pattern="^[A-Za-z\s]{2,10}$"  // Only letters and spaces, 2-10 chars
-        title="Name should contain only letters and spaces (2-10 characters)"
-                    />
-                </div>
-                <div className="form-field">
-                    <label >Assign Date</label>
-                    <input 
-                        type="date"
-            name="adate"
-            value={formData.adate}
-            onChange={handleChange}
-            required
-                    />
-                </div>
-                <div className="form-field">
-                    <label >Issue</label>
-                    <input 
-                         name="issue"
-            value={formData.issue}
-            onChange={handleChange} 
-            required
-            pattern="^[A-Za-z\s]{2,50}$"  // Only letters and spaces, 2-10 chars
-        title="Name should contain only letters and spaces (2-50 characters)"
-                    />
-                </div>
-                <div className="form-field">
-                    <label >Maintenance End Date</label>
-                    <input 
-                         type="date"
-            name="edate"
-            value={formData.edate}
-            onChange={handleChange} 
-            required
-                    />
-                </div>
-                <button 
-                    type="submit"
-                >
-                    Assign
-                </button>
-            </form>
+            </div>
         </div>
-
-
-
-           
-  )
+    )
 }
-
-
-
 
 export default AddT

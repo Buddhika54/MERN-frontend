@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Home from './Components/Home/Home';
-import MaintenanceSummary from './Components/MaintenanceSummary';
 import MachinesList from './Components/Machines/MachinesList';
 import AddMachines from './Components/Machines/AddMachines';
 import EditMachine from './Components/EditMachine';
@@ -14,6 +13,7 @@ import ListT from './Components/Technician/ListT';
 import NewTech from './Components/Technician/NewTech';
 import EditT from './Components/Technician/EditT';
 import AssignList from './Components/Assign/AssignList';
+import AssignInfo from './Components/Assign/AssignInfo';
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route index element={<Home/>}/>
-          <Route path="/home" element={<MaintenanceSummary/>}/>
+          <Route path="/home" element={<Home/>}/>
 
           <Route path="/home/machines" element={<MachinesList/>}/>
           <Route path="/home/add-machine" element={<AddMachines/>}/>
@@ -39,6 +39,8 @@ function App() {
           <Route path="/home/technician/:id" element={<EditT/>}/>
           
           <Route path="/home/assign" element={<AssignList/>}/>
+          <Route path="/home/assign-info/:id" element={<AssignInfo/>}/>
+
         </Routes>
       </BrowserRouter>
 

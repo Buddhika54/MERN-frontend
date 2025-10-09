@@ -1,18 +1,15 @@
 import React from 'react'
-
-import SideBar from '../SideBar';
-import MaintenanceSummary from '../MaintenanceSummary';
-import Navbar from '../Navbar';
-import './Home.css'
-
+import SideBar from '../SideBar'
+import MaintenanceSummary from '../MaintenanceSummary'
+import Navbar from '../Navbar'
 
 function Home() {
   return (
-    <div className="home-container">
-      <SideBar/>
-      <div className="home-main">
-        <Navbar/>
-        <MaintenanceSummary/>
+    <div className="flex"> {/* home-container */}
+      <SideBar />
+      <div className="flex-1 ml-64 bg-[#b5fcca] h-screen"> {/* home-main */}
+        <Navbar />
+        <MaintenanceSummary />
       </div>
     </div>
   )

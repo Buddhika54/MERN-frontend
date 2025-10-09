@@ -7,9 +7,12 @@ import './MaintenanceSummary.css'
 
 
 function MaintenanceSummary() {
+
+  
+
   return (
     <div className="summary-container">
-      <h1 >Dashboard Overview</h1>
+      <h3 >Dashboard Overview</h3>
       <div className="summary-grid">
         <SummaryCard icon={<FaTools />}  text="Total Machines"number={30} color="bg-light-green"/>
         <SummaryCard icon={<FaUsers />} text="Total Technicians"number={25} color="bg-light-yellow"/>
