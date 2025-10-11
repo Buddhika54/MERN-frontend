@@ -12,7 +12,7 @@ function EditT() {
         phone: '',
         specialty: '',
         availability: '',
-        work: ''
+        work:'' 
     })
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
@@ -151,15 +151,15 @@ function EditT() {
                                     className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
                                 >
                                     <option value="">-- Select Availability --</option>
-                                    <option value="available">Available</option>
-                                    <option value="not-available">Not Available</option>
+                                    <option value="available">available</option>
+                                    <option value="not-available">not available</option>
                                 </select>
                             </div>
 
                             {/* Work */}
                             <div>
                                 <label className="block text-gray-700 font-medium mb-1">Work</label>
-                                <select
+                                 <select
                                     name="work"
                                     value={technician.work}
                                     onChange={handleChange}
@@ -167,9 +167,10 @@ function EditT() {
                                     className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
                                 >
                                     <option value="">-- Select Work --</option>
-                                    <option value="assigned">Assigned</option>
-                                    <option value="not-assigned">Not Assigned</option>
+                                    <option value="assigned">assigned</option>
+                                    <option value="not-assigned">not assigned</option>
                                 </select>
+                                   
                             </div>
 
                             {/* Submit */}

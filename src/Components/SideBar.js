@@ -46,12 +46,7 @@ function SideBar() {
           <span>Assign</span>
         </NavLink>
 
-        <NavLink 
-          to="/home"
-          className="flex items-center gap-4 px-4 py-2 rounded-md text-white bg-green-500 hover:bg-green-700 transition-colors text-lg font-medium"
-        >
-          <span>Records</span>
-        </NavLink>
+        
       </div>
     </div>
   )

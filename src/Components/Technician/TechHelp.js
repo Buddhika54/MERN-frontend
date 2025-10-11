@@ -35,6 +35,11 @@ export const TechnicianButtons = ({ id, onTechnicianDelete }) => {
     }
   }
 
+  const handleAssign = () => {
+    // ✅ Navigate to Techpdf.js page with technician ID
+    navigate(`/home/technician/assign/${id}`);
+  };
+
   return (
     <div className="flex gap-2 justify-center items-center">
       <button
@@ -49,6 +54,7 @@ export const TechnicianButtons = ({ id, onTechnicianDelete }) => {
       >
         Delete
       </button>
+      <button  onClick={handleAssign} className="px-3 py-1 rounded-md text-sm font-medium bg-blue-500 text-white hover:bg-blue-600 transition">Assign</button>
     </div>
   )
 }

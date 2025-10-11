@@ -11,7 +11,7 @@ function NewTech() {
     phone: '',
     specialty: '',
     availability: '',
-    work: ''
+    work: 'not-assigned'  // ✅ Default value
   })
 
   const navigate = useNavigate()
@@ -139,17 +139,14 @@ function NewTech() {
               {/* Work */}
               <div>
                 <label className="block text-gray-700 font-medium mb-1">Work</label>
-                <select
+                 <input
+                  type="text"
                   name="work"
-                  value={technician.work}
-                  onChange={handleChange}
-                  required
+                  value="Not Assigned"
+                  readOnly
+                  disabled
                   className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
-                >
-                  <option value="">-- Select Work --</option>
-                  <option value="assigned">Assigned</option>
-                  <option value="not-assigned">Not Assigned</option>
-                </select>
+                />
               </div>
 
               {/* Submit */}

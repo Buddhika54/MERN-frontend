@@ -28,25 +28,52 @@ function AssignInfo() {
   }, [id]);
 
   const handlePrint = () => {
-    const printContents = printRef.current.innerHTML;
-    const printWindow = window.open('', '', 'height=600,width=800');
-    printWindow.document.write('<html><head><title>Assignment Info</title>');
-    printWindow.document.write(
-      `<style>
-        body { display: flex; justify-content: center; align-items: center; }
-        table { width: 400px; border-collapse: collapse; table-layout: fixed; }
-        td, th { border: 1px solid #444; padding: 4px 8px; }
-        td.label { text-align: right; font-weight: 600; }
-        td.value { text-align: left; }
-        h2 { text-align: center; color: green; }
-      </style>`
-    );
-    printWindow.document.write('</head><body>');
-    printWindow.document.write(printContents);
-    printWindow.document.write('</body></html>');
-    printWindow.document.close();
-    printWindow.print();
-  };
+  const printContents = printRef.current.innerHTML;
+  const printWindow = window.open('', '', 'height=600,width=800');
+  printWindow.document.write('<html><head><title>Assignment Info</title>');
+  printWindow.document.write(
+    `<style>
+      body {
+        margin: 40px;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background: #fff;
+      }
+      h3 {
+        text-align: center;
+        color: green;
+        margin-bottom: 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+      }
+      td, th {
+        border: 1px solid #444;
+        padding: 6px 10px;
+        vertical-align: top;
+      }
+      td.label {
+        text-align: right;
+        font-weight: 600;
+        width: 40%;
+        white-space: nowrap;
+        background: #f2f2f2;
+      }
+      td.value {
+        text-align: left;
+        width: 60%;
+      }
+    </style>`
+  );
+  printWindow.document.write('</head><body>');
+  printWindow.document.write(printContents);
+  printWindow.document.write('</body></html>');
+  printWindow.document.close();
+  printWindow.focus();
+  printWindow.print();
+};
 
   if (loading) return <div className="p-6 ml-64 mt-12">Loading...</div>;
   if (error) return <div className="p-6 ml-64 mt-12 text-red-600">{error}</div>;
@@ -65,29 +92,28 @@ function AssignInfo() {
             <h3 className="text-xl font-semibold mb-4 text-center text-green-600">
               Assignment Details
             </h3>
-            <table className="table-fixed w-full mx-auto">
+            <table className="w-full mx-auto border-collapse">
               <tbody>
                 <tr>
-  <td className="label w-1/3 py-1 px-2">Technician Name</td>
-  <td className="value w-2/3 py-1 px-6">{assign.techname}</td>
-</tr>
-<tr>
-  <td className="label w-1/3 py-1 px-2">Machine Name</td>
-  <td className="value w-2/3 py-1 px-6">{assign.machinename}</td>
-</tr>
-<tr>
-  <td className="label w-1/3 py-1 px-2">Assigned Date</td>
-  <td className="value w-2/3 py-1 px-6">{new Date(assign.adate).toLocaleDateString()}</td>
-</tr>
-<tr>
-  <td className="label w-1/3 py-1 px-2">Should Complete</td>
-  <td className="value w-2/3 py-1 px-6">{new Date(assign.edate).toLocaleDateString()}</td>
-</tr>
-<tr>
-  <td className="label w-1/3 py-1 px-2">Issue</td>
-  <td className="value w-2/3 py-1 px-6">{assign.issue}</td>
-</tr>
-
+                  <td className="label w-2/5 py-1 px-2 whitespace-nowrap">Technician Name -</td>
+                  <td className="value w-3/5 py-1 px-4">{assign.techname}</td>
+                </tr>
+                <tr>
+                  <td className="label w-2/5 py-1 px-2 whitespace-nowrap">Machine Name -</td>
+                  <td className="value w-3/5 py-1 px-4">{assign.machinename}</td>
+                </tr>
+                <tr>
+                  <td className="label w-2/5 py-1 px-2 whitespace-nowrap">Assigned Date -</td>
+                  <td className="value w-3/5 py-1 px-4">{new Date(assign.adate).toLocaleDateString()}</td>
+                </tr>
+                <tr>
+                  <td className="label w-2/5 py-1 px-2 whitespace-nowrap">Should Complete -</td>
+                  <td className="value w-3/5 py-1 px-4">{new Date(assign.edate).toLocaleDateString()}</td>
+                </tr>
+                <tr>
+                  <td className="label w-2/5 py-1 px-2 whitespace-nowrap">Maintenance Issue -</td>
+                  <td className="value w-3/5 py-1 px-4">{assign.issue}</td>
+                </tr>
               </tbody>
             </table>
           </div>

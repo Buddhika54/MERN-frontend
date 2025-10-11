@@ -14,6 +14,7 @@ import NewTech from './Components/Technician/NewTech';
 import EditT from './Components/Technician/EditT';
 import AssignList from './Components/Assign/AssignList';
 import AssignInfo from './Components/Assign/AssignInfo';
+import Techpdf from './Components/Technician/Techpdf'; 
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route path="/home/technician" element={<ListT/>}/>
           <Route path="/home/new-technician" element={<NewTech/>}/>
           <Route path="/home/technician/:id" element={<EditT/>}/>
+          <Route path="/home/technician/assign/:id" element={<Techpdf />} />
           
           <Route path="/home/assign" element={<AssignList/>}/>
           <Route path="/home/assign-info/:id" element={<AssignInfo/>}/>

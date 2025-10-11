@@ -75,7 +75,7 @@ export const MaintenanceButtons = ({id, onMaintenanceDelete}) =>{
             <button onClick={()=>navigate(`/home/maintenance/${id}`)}className="edit-btn">Edit</button>
             <button onClick={handleDelete}className="delete-btn">Delete</button>
             <button  onClick={() => navigate(`/home/add-technician?id=${id}`)}className="tech-btn">Technicians</button>
-            <button className="repo-btn">Records</button>
+           
         </div>
     )
 
